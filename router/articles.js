@@ -9,10 +9,10 @@ router.get('/',(req,res)=>{
    res.send('hello from article root')
 })
 router.get('/new',(req,res)=>{
-   res.render('new.ejs',{article_schema:new article_schema})
+   res.render('new.ejs',{article_schema:new article_schema()})
   // res.send("hello from new article")
 })
-/*router.get('/:id',async(req,res)=>{
+router.get('/:id',async(req,res)=>{
   
    const idfind = await  article_schema.findById(req.params.id)
 
@@ -21,12 +21,12 @@ router.get('/new',(req,res)=>{
         console.log("id not in database")
         res.redirect('/')
    }else{
-      res.render('show.ejs', {article_schema:article_schema})
+      res.render('show.ejs', {article_schema: idfind})
 
    }
 
   
-})*/
+})
 router.post('/',async(req,res,next)=>{
     let newData = new article_schema
     ({
@@ -36,8 +36,7 @@ router.post('/',async(req,res,next)=>{
    })
    try{
       newData = await newData.save()
-      console.log("data saved to server")
-      console.log(newData.id)
+      
       res.redirect(`/articles/${newData.id}`)
    }
    catch(e){

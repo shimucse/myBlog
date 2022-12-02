@@ -10,7 +10,11 @@
 </head>
 <body>
   <div class="container">
-         
+    
+    <h1 class="mb-1" >Title:<%= article_schema.title %> </h1>
+    <h1 class="mb-1" >Description:<%= article_schema.description%> </h1>
+    <h1 class="mb-1">Date:<%= article_schema.creatTime.toLocaleDateString() %> </h1>
+
     
   </div> 
 </body>
