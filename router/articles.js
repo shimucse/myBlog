@@ -42,11 +42,21 @@ router.post('/',async(req,res,next)=>{
    catch(e){
       console.log("error"+e)
       res.render('article/new',{article_schema:newData})
-   }
- 
-   
-
+   }  
    next()
+})
 
+router.delete('/:id', async(req,res)=>{
+
+   console.log("delete page")
+   try{
+      console.log('hi')
+      await article_schema.findByIdAndDelete(req.params.id)
+      res.redirect('/')
+   }
+   catch(e){
+      console.log("error: "+ error)
+   }
+  
 })
 module.exports = router

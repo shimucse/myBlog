@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Blog</title>
 </head>
 <body>
   <div class="container">
-      <h1 class="mb-4">Blog Articles</h1>   
-      <a href="/articles/new" class="btn btn-success"  style="margin-top:30px;">New Article</a>
-     
-      <%   article_schema.forEach((article_schema)=>{%>
+    <h1 class="mb-4">Blog Articles</h1>
+    <a href="/articles/new" class="btn btn-success">New Article</a>
 
-        <div class="card" style="width: 136rem; margin-top: 50px; border: 1px dotted slategray;">
-        
-          <div class="card-body" style="margin-left:50px;">
-
-              <h2  class="card-title">Title: <%= article_schema.title %> </h2>
-              <div class="card-subtitle text-muted mb-2">
-                <%= article_schema.creatTime.toLocaleDateString() %> 
-              </div>
-              <div class="card-text mb-2"><%= article_schema.description%></div>
-              <div style="margin-bottom: 40px;">
-              <a href=<%-  `/articles/${article_schema.id}`  %> class="btn btn-primary">Read More</a>
-              <a href="" class="btn btn-primary">Edit</a>
-              <a href="" class="btn btn-danger">Delete</a>
-            </div>
-        
-            
-             </div>
+    <% article_schema.forEach(article_schema => { %>
+      <div class="card mt-4">
+        <div class="card-body">
+          <h4 class="card-title"><%= article_schema.title %></h4>
+          <div class="card-subtitle text-muted mb-2">
+            <%= article_schema.creatTime.toLocaleDateString()  %>
+          </div>
+          <div class="card-text mb-2"><%= article_schema.description %></div>
+          <a href="articles/<%= article_schema.id %>" class="btn btn-primary">Read More</a>
+          <a href="articles/edit/<%= article_schema.id %>" class="btn btn-info">Edit</a>
+          <form action="/articles/<%= article_schema.id %>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
         </div>
-      <%    })  %>
-  </div> 
+      </div>
+    <% }) %>
+  </div>
 </body>
-</htl>
+</html>
